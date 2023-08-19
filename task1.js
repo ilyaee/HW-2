@@ -23,23 +23,45 @@ console.log(`Логи будут сохранены в файл ${logFileAddr}`)
 
 let isOk = new Boolean(true)
 let a = Math.floor(Math.random() * 2) + 1
-let turns = []
+// let turns = []
 
 // console.log(a) // to delete
 
 let inp = prompt(`Вам нужно отгадать число 1 или 2. Введите число: `)
-turns.push(inp)
+let yn
+// turns.push(inp)
 do {
     if (+inp === a) {
-        console.log(`Вы угадали, это ${a}`)
-        fs.appendFile(logFileAddr, `${JSON.stringify(turns)}\n`, (err) => {
+        // console.log(`Вы угадали, это ${a}`)
+        fs.appendFile(logFileAddr, `Win\n`, (err) => {
             if (err) {
                 throw Error(err)
             }            
         })
-        isOk = false
+        yn = prompt(`Верно. Хотите попробовать еще раз? (y / n): `)
+        if (yn === "y") {
+            a = Math.floor(Math.random() * 2) + 1
+            // console.log(a) //to delete
+            inp = prompt(`Вам нужно отгадать число 1 или 2. Введите число: `)
+        } else {
+            console.log(`До свидания`)
+            isOk = false
+        }
     } else {
-        inp = prompt(`Неверно, попробуйте отгадать еще раз: `)
-        turns.push(inp)
+        fs.appendFile(logFileAddr, `Lose\n`, (err) => {
+            if (err) {
+                throw Error(err)
+            }            
+        })
+        yn = prompt(`Неверно. Хотите попробовать еще раз? (y / n): `)
+        if (yn === "y") {
+            a = Math.floor(Math.random() * 2) + 1
+            // console.log(a) //to delete
+            inp = prompt(`Вам нужно отгадать число 1 или 2. Введите число: `)
+        } else {
+            console.log(`До свидания`)
+            isOk = false
+        }
+        // turns.push(inp)
     }
 } while (isOk)
