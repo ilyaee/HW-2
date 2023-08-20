@@ -6,7 +6,7 @@ fs.readFile(path.join(__dirname, 'data', 'log.txt'), 'utf-8', (err, data) => {
     if (err) throw Error(err)
     arr = data.split("\n")
     arr.pop()
-    console.log(arr)
+    // console.log(arr)
     
 
     // всего партий
@@ -15,22 +15,24 @@ fs.readFile(path.join(__dirname, 'data', 'log.txt'), 'utf-8', (err, data) => {
 
 
     // выигранных партий
-    let wins = arr.reduce(function(acc, cur) {
-        if (cur === "Win") {
-            acc++
-        }
-        return acc
-    }, 0)
+    // let wins = arr.reduce((acc, cur) => {
+    //     if (cur === "Win") {
+    //         acc++
+    //     }
+    //     return acc
+    // }, 0)
+    let wins = arr.filter((elem) => elem === "Win").length
     console.log(`Выигранных матчей: ${wins}`)
     
     
     // проигранных партий
-    let loses = arr.reduce(function(acc, cur) {
-        if (cur === "Lose") {
-            acc++
-        }
-        return acc
-    }, 0)
+    // let loses = arr.reduce((acc, cur) => {
+    //     if (cur === "Lose") {
+    //         acc++
+    //     }
+    //     return acc
+    // }, 0)
+    let loses = arr.filter((elem) => elem === "Lose").length
     console.log(`Проигранных матчей: ${loses}`)
     
 
